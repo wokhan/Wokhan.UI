@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>4f5fd240-f312-4bdd-b1e2-10ce168190a4</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Wokhan.UI.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\BooleanNegateConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\DictionaryMapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\NullableToValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ObjectToBoolConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ObjectToDataTemplateConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\SelectorFromAncestorConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\TranslateConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ValueToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ValueToVisibilityNegateConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ViewBoxFixedFontSizeConverter.cs" />
+  </ItemGroup>
+</Project>
