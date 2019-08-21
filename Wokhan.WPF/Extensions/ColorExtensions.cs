@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace QuAnalyzer.Generic.Extensions
+namespace Wokhan.UI.Extensions
 {
     public static class ColorExtensions
     {

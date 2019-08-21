@@ -19,5 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ValueToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ValueToVisibilityNegateConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ViewBoxFixedFontSizeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\DateTimeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ResourcesExtensions.cs" />
   </ItemGroup>
 </Project>

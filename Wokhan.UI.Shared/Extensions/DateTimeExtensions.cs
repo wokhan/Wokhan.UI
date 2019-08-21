@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Wokhan.UI.Extensions;
 #if __UAP__
 using Windows.Globalization;
 using Windows.Globalization.DateTimeFormatting;

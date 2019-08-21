@@ -5,7 +5,7 @@ using Android.Content.Res;
 using Java.Util;
 using Wokhan.Core.Extensions;
 
-namespace Wokhan.UWP.Extensions
+namespace Wokhan.UI.Extensions
 {
     public static partial class ResourcesExtensions
     {

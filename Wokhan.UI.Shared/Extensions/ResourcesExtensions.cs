@@ -1,6 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-
-namespace Wokhan.UWP.Extensions
+namespace Wokhan.UI.Extensions
 {
     public static partial class ResourcesExtensions
     {

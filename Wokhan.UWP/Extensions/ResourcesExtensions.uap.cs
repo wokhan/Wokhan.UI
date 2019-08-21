@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.Resources.Core;
 using Wokhan.Core.Extensions;
 
-namespace Wokhan.UWP.Extensions
+namespace Wokhan.UI.Extensions
 {
     public static partial class ResourcesExtensions
     {

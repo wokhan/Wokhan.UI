@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Globalization;
+using Wokhan.UI.Extensions;
 #if __WPF__
 using System.Windows.Data;
-using Wokhan.UI.WPF.Extensions;
 #else
-using Wokhan.UWP.Extensions;
 using Windows.UI.Xaml.Data;
 #endif
 
