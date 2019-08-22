@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wokhan.Extensions\Wokhan.Extensions.csproj" />
+    <ProjectReference Include="..\Wokhan.Extensions\Wokhan.Core.csproj" />
   </ItemGroup>
   
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
-using System.Runtime.CompilerServices;
 using Wokhan.Core.Extensions;
 
 namespace Wokhan.UI.Extensions

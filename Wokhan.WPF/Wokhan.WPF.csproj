@@ -10,13 +10,13 @@
   </PropertyGroup>
   
   <Import Project="..\Wokhan.UI.Shared\Wokhan.UI.Shared.projitems" Label="Shared" />
-  
-  <ItemGroup>
-    <ProjectReference Include="..\Wokhan.Core\Wokhan.Core.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="VirtualizingObservableCollection" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wokhan.Extensions\Wokhan.Core.csproj" />
   </ItemGroup>
   
   
