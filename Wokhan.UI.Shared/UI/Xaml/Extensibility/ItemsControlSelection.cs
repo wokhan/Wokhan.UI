@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Wokhan.Core.Extensions;
 using Wokhan.Collections.Generic.Extensions;
+#if __WPF__
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+#endif
 
-namespace Wokhan.Shared.Extensions
+namespace Wokhan.Shared.UI.Xaml.Extensibility
 {
     public class ItemsControlSelection
     {
@@ -40,7 +46,7 @@ namespace Wokhan.Shared.Extensions
             }
 
             lst.SelectionChanged -= SelectionChanged;
-#if __UAP__
+#if __UAP__ || __WPF__
             var path = (string)lst.GetValue(Selector.SelectedValuePathProperty);
 #else
             var path = (string)lst.GetDependencyPropertyValue(nameof(Selector.SelectedValuePath));
@@ -49,7 +55,7 @@ namespace Wokhan.Shared.Extensions
             lst.SelectedItems.Clear();
             if (e.NewValue != null && ((ICollection)e.NewValue).Count > 0)
             {
-                IEnumerable<object> news = ((ICollection)e.NewValue).Cast<object>().Join(lst.Items, a => a, b => b.GetValueFromPath(path), (a, b) => b);
+                IEnumerable<object> news = ((ICollection)e.NewValue).Cast<object>().Join(lst.Items.Cast<object>(), a => a, b => b.GetValueFromPath(path), (a, b) => b);
                 lst.SelectedItems.AddRange(news);
             }
 
@@ -71,7 +77,7 @@ namespace Wokhan.Shared.Extensions
             }*/
 
             IList src = GetSelectedValues(lst);
-#if __UAP__
+#if __UAP__ || __WPF__
             var path = (string)lst.GetValue(Selector.SelectedValuePathProperty);
 #else
             var path = (string)lst.GetDependencyPropertyValue(nameof(Selector.SelectedValuePath));
@@ -79,7 +85,7 @@ namespace Wokhan.Shared.Extensions
             if (lst.SelectedItem != null)
             {
                 src.Clear();
-                src.AddRange(lst.SelectedItems.Select(i => i.GetValueFromPath(path)));
+                src.AddRange(lst.SelectedItems.Cast<object>().Select(item => item.GetValueFromPath(path)));
             }
             //src.AddRange(e.AddedItems.Select(i => i.GetValueFromObject(path)));
             //src.RemoveRange(e.RemovedItems.Select(i => i.GetValueFromObject(path)));

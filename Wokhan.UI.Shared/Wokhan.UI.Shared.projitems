@@ -9,6 +9,8 @@
     <Import_RootNamespace>Wokhan.UI.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ValueChecker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ImageSourceConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\BooleanNegateConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\DictionaryMapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\NullableToValueConverter.cs" />
@@ -21,5 +23,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)BindingConverters\ViewBoxFixedFontSizeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DateTimeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ResourcesExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Xaml\Extensibility\ItemsControlSelection.cs" />
   </ItemGroup>
 </Project>
