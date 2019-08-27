@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wokhan.Extensions\Wokhan.Core.csproj" />
+    <ProjectReference Include="..\Wokhan.Core\Wokhan.Core.csproj" />
   </ItemGroup>
   
   
