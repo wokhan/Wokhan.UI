@@ -3,7 +3,11 @@
   <PropertyGroup>
     <TargetFrameworks>monoandroid81;uap10.0.16299</TargetFrameworks>
   </PropertyGroup>
-  
+
+  <PropertyGroup Label="Android DesignTimeBuild error workaround">
+    <DesignTimeBuild>false</DesignTimeBuild>
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
     <DefineConstants>$(DefineConstants);__UAP__</DefineConstants>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
@@ -25,7 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Wokhan.Core\Wokhan.Core.csproj" />
   </ItemGroup>
-  
+
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
