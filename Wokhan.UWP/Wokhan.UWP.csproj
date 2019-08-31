@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>uap10.0.16299;monoandroid81</TargetFrameworks>
+    <TargetFrameworks>monoandroid81;uap10.0.16299</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(TargetFramework.StartsWith('uap'))">
@@ -22,15 +22,15 @@
   <ItemGroup>
     <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
   </ItemGroup>
+  
+  <ItemGroup Condition="$(TargetFramework.StartsWith('monoandroid'))">
+    <PackageReference Include="Uno.UI" Version="1.45.0" />
+  </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('uap'))">
     <Compile Remove="obj\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="obj\**" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith('monoandroid'))">
-    <PackageReference Include="Uno.UI" Version="1.45.0" />
   </ItemGroup>
 
   <ItemGroup>
