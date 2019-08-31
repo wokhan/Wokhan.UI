@@ -23,6 +23,9 @@
 
   <ItemGroup>
     <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'monoandroid81' ">
     <PackageReference Include="Uno.UI" Version="1.45.0" />
   </ItemGroup>
 
