@@ -5,8 +5,18 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="$(TargetFramework.StartsWith('uap'))">
+    <!--<NugetTargetMoniker>UAP,Version=v10.0</NugetTargetMoniker>-->
+    <!--<TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetFrameworkIdentifier>.NETCore</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>-->
     <DefineConstants>$(DefineConstants);__UAP__</DefineConstants>
+    <!--<TargetPlatformVersion>10.0.16299</TargetPlatformVersion>-->
+    <!--<TargetPlatformMinVersion>10.0.16299</TargetPlatformMinVersion>-->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <!--<ProduceReferenceAssembly>false</ProduceReferenceAssembly>-->
+    <!--<AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>-->
+    <!--<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>-->
+    <!--<NoWarn>$(NoWarn),1998,4014,VSX1000,NU1605</NoWarn>-->
   </PropertyGroup>
 
   <PropertyGroup Condition="$(TargetFramework.StartsWith('monoandroid'))">
@@ -21,10 +31,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
-  </ItemGroup>
-  
-  <ItemGroup Condition="$(TargetFramework.StartsWith('monoandroid'))">
-    <PackageReference Include="Uno.UI" Version="1.45.0" />
+    <PackageReference Include="Uno.UI" Version="1.45.0" Condition="$(TargetFramework.StartsWith('monoandroid'))" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('uap'))">
@@ -40,10 +47,10 @@
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
-  
-  <PropertyGroup>
+
+  <!--<PropertyGroup>
     <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-  
+  </PropertyGroup>-->
+
   <Import Project="..\Wokhan.UI.Shared\Wokhan.UI.Shared.projitems" Label="Shared" />
 </Project>
