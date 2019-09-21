@@ -31,7 +31,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
-    <PackageReference Include="Uno.UI" Version="1.45.0" Condition="$(TargetFramework.StartsWith('monoandroid'))" />
+    <PackageReference Include="Uno.UI" Version="2.0.231-dev.2738" Condition="$(TargetFramework.StartsWith('monoandroid'))" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('uap'))">
