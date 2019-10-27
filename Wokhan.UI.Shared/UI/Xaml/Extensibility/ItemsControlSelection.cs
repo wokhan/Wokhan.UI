@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Wokhan.Core.Extensions;
 using Wokhan.Collections.Generic.Extensions;
+using System;
 #if __WPF__
 using System.Windows;
 using System.Windows.Controls;
@@ -55,7 +56,8 @@ namespace Wokhan.Shared.UI.Xaml.Extensibility
             lst.SelectedItems.Clear();
             if (e.NewValue != null && ((ICollection)e.NewValue).Count > 0)
             {
-                IEnumerable<object> news = ((ICollection)e.NewValue).Cast<object>().Join(lst.Items.Cast<object>(), a => a, b => b.GetValueFromPath(path), (a, b) => b);
+                Func<object, object> getValue = (x) => path != null ? x.GetValueFromPath(path) : x;
+                IEnumerable<object> news = ((ICollection)e.NewValue).Cast<object>().Join(lst.Items.Cast<object>(), a => a, getValue, (a, b) => b);
                 lst.SelectedItems.AddRange(news);
             }
 
