@@ -1,5 +1,6 @@
 ﻿#if !__UAP__
 using System;
+using System.Diagnostics.Contracts;
 using Android.Content;
 using Android.Content.Res;
 using Java.Util;
@@ -27,11 +28,8 @@ namespace Wokhan.UI.Extensions
 
         public static string Translate(this string src)
         {
-            if (src == null)
-            {
-                throw new ArgumentNullException(nameof(src));
-            }
-
+            Contract.Requires(src != null);
+            
             var id = _resources.GetIdentifier(src, "string", _packageName);
             return _resources.GetStringDef(id)
                 ?? _defResources.GetStringDef(id).ToPseudo()

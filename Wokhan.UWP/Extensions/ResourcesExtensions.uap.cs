@@ -1,6 +1,7 @@
 ﻿#if __UAP__
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.Resources.Core;
@@ -15,13 +16,10 @@ namespace Wokhan.UI.Extensions
 
         private static ResourceMap _resourceMap;
         private static ResourceMap ResourceMap => _resourceMap = (_resourceMap ?? ResourceManager.Current.MainResourceMap.GetSubtree("Resources"));
-            
+
         public static string Translate(this string src)
         {
-            if (src == null)
-            {
-                throw new ArgumentNullException(nameof(src));
-            }
+            Contract.Requires(src != null);
 
             ResourceCandidate res = ResourceMap.GetValue(src, ResourceContext);
             if (res == null)

@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using Wokhan.Core.Extensions;
+using System.Diagnostics.Contracts;
 
 namespace Wokhan.UI.Extensions
 {
@@ -12,10 +13,7 @@ namespace Wokhan.UI.Extensions
 
         public static string Translate(this string src)
         {
-            if (src == null)
-            {
-                throw new ArgumentNullException(nameof(src));
-            }
+            Contract.Requires(src != null);
 
             var res = resourceManager.GetString(src);
             if (res == null)

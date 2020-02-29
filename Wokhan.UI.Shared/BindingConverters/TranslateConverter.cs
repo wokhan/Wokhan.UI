@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Wokhan.UI.Extensions;
+using System.Diagnostics.Contracts;
 #if __WPF__
 using System.Windows.Data;
 #else
@@ -13,10 +14,7 @@ namespace Wokhan.Shared.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null)
-            {
-                throw new ArgumentException(nameof(value));
-            }
+            Contract.Requires(value != null);
 
             if (parameter is string prefix)
             {

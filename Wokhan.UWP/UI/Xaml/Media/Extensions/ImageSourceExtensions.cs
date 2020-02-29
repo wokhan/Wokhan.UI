@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -11,10 +12,7 @@ namespace Wokhan.UWP.UI.Xaml.Media.Extensions
     {
         public static async Task<BitmapImage> LoadFromLocalStorage(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Contract.Requires(name != null);
 
             try
             {
