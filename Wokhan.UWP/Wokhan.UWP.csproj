@@ -32,16 +32,13 @@
   <ItemGroup>
     <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
     <PackageReference Include="Uno.UI" Version="2.0.532" Condition="$(TargetFramework.StartsWith('monoandroid'))" />
+    <PackageReference Include="Wokhan.Core" Version="1.2003.1002.222" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('uap'))">
     <Compile Remove="obj\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="obj\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Wokhan.Core\Wokhan.Core.csproj" />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -9,14 +9,9 @@
     <DefineConstants>$(DefineConstants);__WPF__</DefineConstants>
   </PropertyGroup>
   
-  <Import Project="..\Wokhan.UI.Shared\Wokhan.UI.Shared.projitems" Label="Shared" />
-
   <ItemGroup>
     <PackageReference Include="VirtualizingObservableCollection" Version="1.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Wokhan.Core\Wokhan.Core.csproj" />
+    <PackageReference Include="Wokhan.Core" Version="1.2003.1002.222" />
   </ItemGroup>
   
   
