@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <TargetFrameworks>monoandroid81;uap10.0.16299;netcoreapp3.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('uap'))">
+    <!--<NugetTargetMoniker>UAP,Version=v10.0</NugetTargetMoniker>-->
+    <!--<TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetFrameworkIdentifier>.NETCore</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>-->
+    <DefineConstants>$(DefineConstants);__UAP__</DefineConstants>
+    <!--<TargetPlatformVersion>10.0.16299</TargetPlatformVersion>-->
+    <!--<TargetPlatformMinVersion>10.0.16299</TargetPlatformMinVersion>-->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <!--<ProduceReferenceAssembly>false</ProduceReferenceAssembly>-->
+    <!--<AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>-->
+    <!--<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>-->
+    <!--<NoWarn>$(NoWarn),1998,4014,VSX1000,NU1605</NoWarn>-->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('monoandroid'))">
+    <!--Android DesignTimeBuild error workaround-->
+    <DesignTimeBuild>false</DesignTimeBuild>
+    <DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <DefineConstants>$(DefineConstants);__WPF__</DefineConstants>
+    <UseWPF>True</UseWPF>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Uno.UI" Version="2.0.532" Condition="$(TargetFramework.StartsWith('monoandroid'))" />
+    <PackageReference Include="VirtualizingObservableCollection" Version="1.2.0" Condition="$(TargetFramework.StartsWith('netcoreapp'))" />
+    <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
+    <PackageReference Include="Wokhan.Core" Version="1.2003.1002.222" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('uap'))">
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+    <Compile Remove="**/*.others.*" />
+    <Compile Remove="**/*.wpf.*" />
+    <None Include="**/*.others.*" />
+    <None Include="**/*.wpf.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('monoandroid'))">
+    <Compile Remove="**/*.uap.*" />
+    <Compile Remove="**/*.wpf.*" />
+    <None Include="**/*.uap.*" />
+    <None Include="**/*.wpf.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <Compile Remove="**/*.uwp.*" />
+    <Compile Remove="**/*.uap.*" />
+    <Compile Remove="**/*.others.*" />
+    <None Include="**/*.uwp.*" />
+    <None Include="**/*.uap.*" />
+    <None Include="**/*.others.*" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <Page Include="Specific\WPF\Controls\CustomWindowChrome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>-->
+
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+
+  <!--<PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>-->
+</Project>
