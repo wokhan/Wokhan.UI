@@ -19,6 +19,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Wokhan.UI.Shared\Wokhan.UI.Shared.projitems*{4f5fd240-f312-4bdd-b1e2-10ce168190a4}*SharedItemsImports = 13
 		Wokhan.UI.Shared\Wokhan.UI.Shared.projitems*{67d52ae7-0de0-45d1-9034-1d2baa8d3f32}*SharedItemsImports = 5
+		Wokhan.UI.Shared\Wokhan.UI.Shared.projitems*{73aa94dc-8d76-462e-a9d2-8694b91ae01a}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
