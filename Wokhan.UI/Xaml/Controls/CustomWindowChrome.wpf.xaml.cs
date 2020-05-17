@@ -26,8 +26,8 @@ namespace Wokhan.UI.Controls
         public Style IconStyle { get => (Style)GetValue(IconStyleProperty); set => SetValue(IconStyleProperty, value); }
         public static readonly DependencyProperty IconStyleProperty = DependencyProperty.Register(nameof(IconStyle), typeof(Style), typeof(CustomWindowChrome));
 
-        public Style Caption { get => (Style)GetValue(CaptionProperty); set => SetValue(CaptionProperty, value); }
-        public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register(nameof(Caption), typeof(Style), typeof(CustomWindowChrome));
+        public string Caption { get => (string)GetValue(CaptionProperty); set => SetValue(CaptionProperty, value); }
+        public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register(nameof(Caption), typeof(string), typeof(CustomWindowChrome));
 
         public Style CaptionStyle { get => (Style)GetValue(CaptionStyleProperty); set => SetValue(CaptionStyleProperty, value); }
         public static readonly DependencyProperty CaptionStyleProperty = DependencyProperty.Register(nameof(CaptionStyle), typeof(Style), typeof(CustomWindowChrome));
