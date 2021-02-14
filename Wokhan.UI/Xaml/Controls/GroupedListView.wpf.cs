@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace Wokhan.UI.Controls
+namespace Wokhan.UI.Xaml.Controls
 {
     public class GroupedListView : ListView
     {

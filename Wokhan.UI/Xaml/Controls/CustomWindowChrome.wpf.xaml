@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Wokhan.UI.Controls.CustomWindowChrome"
+﻿<UserControl x:Class="Wokhan.UI.Xaml.Controls.CustomWindowChrome"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" x:Name="me"
+             mc:Ignorable="d"
              d:DesignHeight="34" d:DesignWidth="700">
     <UserControl.Resources>
         <Style x:Key="DefaultButtonStyle" TargetType="Button" BasedOn="{x:Null}">
@@ -13,40 +13,46 @@
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
-                <Setter Property="Foreground" Value="{Binding Foreground,FallbackValue=LightGray}" />
                 <Setter Property="Background" Value="WhiteSmoke" />
                 <Setter Property="Width" Value="40" />
                 <Setter Property="Height" Value="30" />
             </Style.Setters>
         </Style>
-        <Style x:Key="MinimizeButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}" />
-        <Style x:Key="MaximizeButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsWindowMaximized,ElementName=me}" Value="True">
-                    <Setter Property="Content" Value="&#xE923;" />
-                    <Setter Property="Command" Value="{x:Static SystemCommands.RestoreWindowCommand}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-            <Style.Setters>
-                <Setter Property="Background" Value="Red" />
-                <Setter Property="Foreground" Value="White" />
-            </Style.Setters>
-        </Style>
         <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}" />
     </UserControl.Resources>
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Image Margin="0,0,5,0" Stretch="Uniform" Source="{Binding Icon}" VerticalAlignment="Stretch" Style="{Binding IconStyle}" />
-            <TextBlock FontSize="16" VerticalAlignment="Center" Foreground="{Binding Foreground}" Text="{Binding Caption,FallbackValue='Window caption'}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="{Binding TitleAlignment}">
+            <Image Margin="0,0,5,0" Stretch="Uniform" Source="{Binding Window.Icon}" VerticalAlignment="Stretch" Style="{Binding IconStyle}" />
+            <TextBlock FontSize="16" VerticalAlignment="Center" Style="{Binding TitleStyle}" Text="{Binding Window.Title,FallbackValue='Window title'}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
             <StackPanel x:Name="ChildrenHost" Orientation="Horizontal" />
             <StackPanel Orientation="Horizontal">
-                <Button Command="{x:Static SystemCommands.MinimizeWindowCommand}" Style="{StaticResource MinimizeButtonStyle}" Content="&#xE949;" />
-                <Button Command="{x:Static SystemCommands.MaximizeWindowCommand}" Style="{StaticResource MaximizeButtonStyle}" Content="&#xE739;" />
-                <Button Command="{x:Static SystemCommands.CloseWindowCommand}" Style="{StaticResource CloseButtonStyle}" Content="&#xE106;" />
+                <Button Command="{x:Static SystemCommands.MinimizeWindowCommand}" Style="{StaticResource DefaultButtonStyle}" Content="&#xE949;" />
+                <Button>
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                            <Setter Property="Content" Value="&#xE739;" />
+                            <Setter Property="Command" Value="{x:Static SystemCommands.MaximizeWindowCommand}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsWindowMaximized}" Value="True">
+                                    <Setter Property="Content" Value="&#xE923;" />
+                                    <Setter Property="Command" Value="{x:Static SystemCommands.RestoreWindowCommand}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xE106;">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                            <Style.Setters>
+                                <Setter Property="Background" Value="Red" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Style.Setters>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -1,49 +1,43 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using Android.Content;
-using Android.Content.Res;
-using Java.Util;
+﻿using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+
+using Windows.ApplicationModel.Resources;
+
 using Wokhan.Core.Extensions;
 
 namespace Wokhan.UI.Extensions
 {
     public static partial class ResourcesExtensions
     {
-        private static string _packageName;
-        private static Resources _resources;
-        private static Resources _defResources;
+        static ResourceLoader _resourceLoader = ResourceLoader.GetForCurrentView();
 
-        public static string GetStringDef(this Resources src, int id)
-        {
-            try
-            {
-                return src.GetString(id);
-            }
-            catch
-            {
-                return null;
-            }
-        }
+        delegate string[] EnsureLoadersCulturesDelegate();
+        static EnsureLoadersCulturesDelegate EnsureLoadersCultures = (EnsureLoadersCulturesDelegate)typeof(ResourceLoader).GetMethod("EnsureLoadersCultures", BindingFlags.Static | BindingFlags.NonPublic).CreateDelegate(typeof(EnsureLoadersCulturesDelegate));
+
+        delegate bool FindForCultureDelegate(string culture, string resource, out string resourceValue);
+        static FindForCultureDelegate FindForCulture => (FindForCultureDelegate)typeof(ResourceLoader).GetMethod("FindForCulture", BindingFlags.Instance | BindingFlags.NonPublic).CreateDelegate(typeof(FindForCultureDelegate), _resourceLoader);
 
         public static string Translate(this string src)
         {
             Contract.Requires(src != null);
-            
-            var id = _resources.GetIdentifier(src, "string", _packageName);
-            return _resources.GetStringDef(id)
-                ?? _defResources.GetStringDef(id).ToPseudo()
-                ?? $"!!{src}!!";
-        }
 
-        public static void Init(Context context)
-        {
-            _resources = context.Resources;
-            _packageName = context.PackageName;
+            EnsureLoadersCultures();
+            var currentLanguage = CultureInfo.CurrentUICulture.IetfLanguageTag.ToLowerInvariant();
 
-            var conf = new Configuration(context.Resources.Configuration);
-            conf.SetLocale(Locale.English);
-            Context localizedContext = context.CreateConfigurationContext(conf);
-            _defResources = localizedContext.Resources;
+            var value = _resourceLoader.GetString(src);
+            if (value != null)
+            {
+                return value;
+            }
+
+            if (!currentLanguage.StartsWith("en") && FindForCulture("en", src, out value))
+            {
+                return value.ToPseudo();
+            }
+
+            return $"!!{src}!!";
         }
     }
 }

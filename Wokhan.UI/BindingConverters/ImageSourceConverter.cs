@@ -22,6 +22,7 @@ namespace Wokhan.UI.BindingConverters
         private readonly Regex srcReg = new Regex("/(?<assembly>.*?);(?<path>.*)", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            BitmapFrame bitmapFrame = null;
             var res = srcReg.Match((string)value);
             if (!res.Success)
             {
@@ -36,17 +37,22 @@ namespace Wokhan.UI.BindingConverters
             var stream = Assembly.Load(res.Groups["assembly"].Value).GetManifestResourceStream(res.Groups["path"].Value);
 #if __WPF__
             var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.Default);
-#else
+#endif
+
+#if __UAP__
             var decoderTask = BitmapDecoder.CreateAsync(stream.AsRandomAccessStream()).AsTask();
             decoderTask.Wait();
             var decoder = decoderTask.Result;
 #endif
+
 #if __WPF__
-            var bitmapFrame = decoder.Frames[0];
-#else
+            bitmapFrame = decoder.Frames[0];
+#endif
+
+#if __UAP__
             var bitmapTask = decoderTask.Result.GetFrameAsync(0).AsTask();
             bitmapTask.Wait();
-            var bitmapFrame = bitmapTask.Result;
+            bitmapFrame = bitmapTask.Result;
 #endif
 
             return bitmapFrame;

@@ -1,0 +1,50 @@
+﻿<Control x:Class="Wokhan.UI.Xaml.Extensibility.CustomAdorner"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+         xmlns:bindingconverters="clr-namespace:Wokhan.UI.BindingConverters">
+    <Control.Resources>
+        <bindingconverters:ValueToVisibilityConverter x:Key="valueToVisibility" />
+        <ControlTemplate x:Key="Template">
+            <Grid DataContext="{Binding RelativeSource={x:Static RelativeSource.TemplatedParent},Mode=OneWay}" HorizontalAlignment="{Binding HorizontalAlignment,FallbackValue=Left}" VerticalAlignment="{Binding VerticalAlignment,FallbackValue=Top}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="CustomAdorner_HeaderImageGroup" Width="Auto" />
+                    <ColumnDefinition SharedSizeGroup="CustomAdorner_HeaderGroup" Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ContentControl Style="{Binding HeaderImageStyle}" MaxHeight="{Binding ActualHeight,ElementName=ContentHolder}" Content="{Binding HeaderImage}" Visibility="{Binding HeaderImage,Converter={StaticResource valueToVisibility}}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type sys:String}">
+                            <Image Source="{Binding}" />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type Path}">
+                            <ContentPresenter />
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+                <ContentControl Grid.Column="1" Margin="0,0,5,0" Foreground="{Binding Foreground}" Content="{Binding Header}" Visibility="{Binding Header,Converter={StaticResource valueToVisibility}}" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                <Border Grid.Column="2" CornerRadius="{Binding CornerRadius}" BorderThickness="{Binding BorderThickness}" BorderBrush="{Binding BorderBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{Binding Background}" Effect="{Binding BackgroundEffect}" />
+                <Border Grid.Column="2" Padding="{TemplateBinding Padding}" CornerRadius="{Binding CornerRadius}" BorderThickness="{Binding BorderThickness}" BorderBrush="Transparent" ClipToBounds="True">
+                    <Grid VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="CustomAdorner_ImageGroup" Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl Style="{Binding ImageStyle}" MaxHeight="{Binding ActualHeight,ElementName=ContentHolder}" Content="{Binding Image}" Visibility="{Binding Image,Converter={StaticResource valueToVisibility}}">
+                            <ContentControl.Resources>
+                                <DataTemplate DataType="{x:Type sys:String}">
+                                    <Image Source="{Binding}" />
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type Path}">
+                                    <ContentPresenter />
+                                </DataTemplate>
+                            </ContentControl.Resources>
+                        </ContentControl>
+                        <ScrollViewer Grid.Column="1" Width="{Binding Width,FallbackValue=Auto}" x:Name="PART_ContentHost" Margin="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
+                        <ContentControl Grid.Column="1" x:Name="ContentHolder" HorizontalContentAlignment="{Binding HorizontalContentAlignment}" VerticalAlignment="Center" Content="{Binding Content}" ContentStringFormat="{Binding ContentStringFormat,TargetNullValue='\{0\}'}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+    </Control.Resources>
+</Control>

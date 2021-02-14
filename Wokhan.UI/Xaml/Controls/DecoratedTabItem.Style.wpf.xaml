@@ -1,0 +1,59 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:controls="clr-namespace:Wokhan.UI.Xaml.Controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <Style TargetType="controls:DecoratedTabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:DecoratedTabItem">
+                    <Grid TextBlock.Foreground="{TemplateBinding Foreground}" TextBlock.FontSize="{TemplateBinding FontSize}">
+                        <Border Margin="{TemplateBinding Margin}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" Effect="{TemplateBinding BackgroundEffect}" />
+                        <Border Margin="{TemplateBinding Margin}" CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent">
+                            <Grid VerticalAlignment="Center" Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="DecoratedTabItem_ImageGroup" Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <ContentControl Height="{Binding ActualHeight,ElementName=textContent}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Setter Property="Content" Value="{Binding Image,RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                                            <Setter Property="Foreground" Value="{Binding ImageBrush,RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsChecked,RelativeSource={x:Static RelativeSource.TemplatedParent}}" Value="True">
+                                                    <Setter Property="Content" Value="{Binding ToggledImage,RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                                                    <Setter Property="Foreground" Value="{Binding ToggledImageBrush,RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                    <ContentControl.Resources>
+                                        <DataTemplate DataType="{x:Type sys:String}">
+                                            <Image Source="{Binding}" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type Path}">
+                                            <ContentPresenter>
+                                                <ContentPresenter.Resources>
+                                                    <Style TargetType="Path">
+                                                        <Setter Property="Fill" Value="{Binding ImageBrush,RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsChecked,RelativeSource={x:Static RelativeSource.TemplatedParent}}" Value="True">
+                                                                <Setter Property="Fill" Value="{Binding ToggledImageBrush,RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ContentPresenter.Resources>
+                                            </ContentPresenter>
+                                        </DataTemplate>
+                                    </ContentControl.Resources>
+                                </ContentControl>
+                                <ContentPresenter Grid.Column="1" x:Name="textContent" Margin="5,0,0,0" VerticalAlignment="Center" ContentStringFormat="{TemplateBinding ContentStringFormat}" Content="{TemplateBinding Header}" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
