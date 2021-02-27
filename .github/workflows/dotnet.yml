@@ -39,4 +39,4 @@ jobs:
       run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ steps.getVersion.outputs.result }}
     
     - name: Publish
-      run: nuget push bin/Release/Wokhan.UI.${{ steps.getVersion.output .result }}.nupkg -ApiKey ${{ secrets.nuget_apikey }} -Source https://api.nuget.org/v3/index.json
+      run: nuget push Wokhan.UI/bin/Release/Wokhan.UI.${{ steps.getVersion.outputs.result }}.nupkg -ApiKey ${{ secrets.nuget_apikey }} -Source https://api.nuget.org/v3/index.json
