@@ -2,7 +2,7 @@ name: Publish to Nuget
 
 on:
   push:
-    tags: 'v*'
+    tags: [ 'v*' ]
   
 jobs:
   release:
@@ -30,13 +30,13 @@ jobs:
       uses: Amadevus/pwsh-script@v2.0.1
       id: getVersion
       with:
-        script: '("${{steps.tag.outputs.tag}}").Split("v")[1]'
+        script: '("${{ steps.tag.outputs.tag }}").Split("v")[1]'
     
     - name: Checkout
       uses: actions/checkout@v2
       
     - name: Build and pack
-      run: msbuild -t:pack /restore /p:Configuration=Release
+      run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ steps.getVersion.outputs.result }}
     
     - name: Publish
-      run: nuget push bin/Release/Wokhan.UI.${{steps.getVersion.output}}.nupkg -ApiKey ${{ secrets.nuget_apikey }} -Source https://api.nuget.org/v3/index.json
+      run: nuget push bin/Release/Wokhan.UI.${{ steps.getVersion.output .result }}.nupkg -ApiKey ${{ secrets.nuget_apikey }} -Source https://api.nuget.org/v3/index.json
