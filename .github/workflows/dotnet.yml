@@ -28,9 +28,9 @@ jobs:
     #Source: https://dusted.codes/github-actions-for-dotnet-core-nuget-packages#drive-nuget-version-from-git-tags (ported to PowerShell for Windows runners)
     - name: Set Nuget package version
       run: |
-        $arrTag="${{ env.GITHUB_REF }}" -replace "\\"," " -split " "
+        $arrTag=$env:GITHUB_REF -replace "\\"," " -split " "
         $VERSION=$arrTag[2]
-        $VERSION=$VERSION -replace "v" ""
+        $VERSION=$VERSION -replace "v",""
         $env:PACKAGE_VERSION=$VERSION
 
     - name: Build and pack
