@@ -25,13 +25,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       
-    #Source: https://dusted.codes/github-actions-for-dotnet-core-nuget-packages#drive-nuget-version-from-git-tags
+    #Source: https://dusted.codes/github-actions-for-dotnet-core-nuget-packages#drive-nuget-version-from-git-tags (ported to PowerShell for Windows runners)
     - name: Set Nuget package version
       run: |
-        arrTag=(${GITHUB_REF//\// })
-        VERSION="${arrTag[2]}"
-        VERSION="${VERSION//v}"
-        echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
+        $arrTag="${{ env.GITHUB_REF }}" -replace "\\"," " -split " "
+        $VERSION=$arrTag[2]
+        $VERSION=$VERSION -replace "v" ""
+        $env:PACKAGE_VERSION=$VERSION
 
     - name: Build and pack
       run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ env.PACKAGE_VERSION }}
