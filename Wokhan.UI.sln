@@ -6,18 +6,14 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E6AA8C54-02E4-453A-A0B8-27CB296105AF}"
 	ProjectSection(SolutionItems) = preProject
 		.filenesting.json = .filenesting.json
-		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wokhan.UI", "Wokhan.UI\Wokhan.UI.csproj", "{67D52AE7-0DE0-45D1-9034-1D2BAA8D3F32}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{E861FE42-FF71-4EF1-ADDF-A308248E2235}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{B0DFFDDF-682A-4B48-BE0C-D4E050C0E683}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actions", "actions", "{AA7C94A8-ED2D-4F49-903A-0EE3EA95E847}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actions", "actions", "{96EC5043-9323-4CB7-8682-8AF8123559FE}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 	EndProjectSection
@@ -37,8 +33,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E861FE42-FF71-4EF1-ADDF-A308248E2235} = {E6AA8C54-02E4-453A-A0B8-27CB296105AF}
-		{AA7C94A8-ED2D-4F49-903A-0EE3EA95E847} = {E861FE42-FF71-4EF1-ADDF-A308248E2235}
+		{B0DFFDDF-682A-4B48-BE0C-D4E050C0E683} = {E6AA8C54-02E4-453A-A0B8-27CB296105AF}
+		{96EC5043-9323-4CB7-8682-8AF8123559FE} = {B0DFFDDF-682A-4B48-BE0C-D4E050C0E683}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D334587F-E0DB-4E07-ADB3-D5A01A6EB16C}
