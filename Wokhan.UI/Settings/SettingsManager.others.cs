@@ -1,24 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using Windows.Foundation;
+﻿
+using Windows.Storage;
 
 namespace Wokhan.UI.Settings
 {
     public partial class SettingsManager
     {
-        private static void _cleanUp(bool usePublisherFolder, params string[] fileNames)
-        {
-
-        }
-        
-        private static async Task<T> LoadSettingsAsync<T>(string fileName, bool usePublisherFolder, Func<T> defaultValue = null)
-        {
-            return defaultValue != null ? defaultValue() : Activator.CreateInstance<T>();
-        }
-
-        private static async Task<bool> SaveSettingsAsync<T>(T calOpts, string fileName, bool usePublisher)
-        {
-            return false;
-        }
+        // Not really the best way but the UsePublisherFolder might be useful and it relies on BaseSharedFolder, so keeping it that way for now.
+        private static readonly StorageFolder BaseSharedFolder = ApplicationData.Current.LocalFolder;
+        private static readonly StorageFolder LocalFolder = ApplicationData.Current.LocalFolder;
     }
 }

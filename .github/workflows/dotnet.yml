@@ -22,21 +22,31 @@ jobs:
       with:
         nuget-version: latest
 
-    - name: Get tag
-      id: tag
-      uses: dawidd6/action-get-tag@v1
-    
-    - name: Extract version from tag
-      uses: Amadevus/pwsh-script@v2.0.1
-      id: getVersion
-      with:
-        script: '("${{ steps.tag.outputs.tag }}").Split("v")[1]'
-    
     - name: Checkout
       uses: actions/checkout@v2
       
+    #Source: https://dusted.codes/github-actions-for-dotnet-core-nuget-packages#drive-nuget-version-from-git-tags
+    - name: Set Nuget package version
+      run: |
+        arrTag=(${GITHUB_REF//\// })
+        VERSION="${arrTag[2]}"
+        VERSION="${VERSION//v}"
+        echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
+
     - name: Build and pack
-      run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ steps.getVersion.outputs.result }}
+      run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ env.PACKAGE_VERSION }}
     
+    #- name: Generate documentation (retrieve global tool)
+    #  run: dotnet tool install xmldocmd -g
+
+    #- name: Generate documentation (generate)
+    #  run: xmldocmd Wokhan.Core/bin/Release/netcoreapp3.0/Wokhan.UI.dll docs/generated --source https://github.com/${{ github.repository }} --clean
+
+    #- name: Generate documentation (commit)
+    #  uses: EndBug/add-and-commit@v4.1.0
+    #  with:
+    #    add: docs
+    #    message: Automated documentation update
+
     - name: Publish
-      run: nuget push Wokhan.UI/bin/Release/Wokhan.UI.${{ steps.getVersion.outputs.result }}.nupkg -ApiKey ${{ secrets.nuget_apikey }} -Source https://api.nuget.org/v3/index.json
+      run: nuget push Wokhan.UI/bin/Release/Wokhan.UI.${{ env.PACKAGE_VERSION }}.nupkg -ApiKey ${{ secrets.nuget_apikey }} -Source https://api.nuget.org/v3/index.json
