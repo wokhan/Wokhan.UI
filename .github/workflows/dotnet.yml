@@ -34,7 +34,7 @@ jobs:
         $env:PACKAGE_VERSION=$VERSION
 
     - name: Build and pack
-      run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ env.PACKAGE_VERSION }}
+      run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=$env:PACKAGE_VERSION
     
     #- name: Generate documentation (retrieve global tool)
     #  run: dotnet tool install xmldocmd -g
@@ -49,4 +49,4 @@ jobs:
     #    message: Automated documentation update
 
     - name: Publish
-      run: nuget push Wokhan.UI/bin/Release/Wokhan.UI.${{ env.PACKAGE_VERSION }}.nupkg -ApiKey ${{ secrets.nuget_apikey }} -Source https://api.nuget.org/v3/index.json
+      run: nuget push Wokhan.UI/bin/Release/Wokhan.UI.$env:PACKAGE_VERSION.nupkg -ApiKey ${{ secrets.nuget_apikey }} -Source https://api.nuget.org/v3/index.json
