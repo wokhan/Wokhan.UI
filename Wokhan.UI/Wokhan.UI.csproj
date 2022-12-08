@@ -58,7 +58,7 @@
     <!-- Workaround for NU1605 for DynamicLinq // Source https://docs.microsoft.com/en-us/nuget/reference/errors-and-warnings/nu1605#solution-1 -->
     <PackageReference Include="Microsoft.NETCore.Targets" Version="3.0.0" PrivateAssets="all" />
     <PackageReference Include="Uno.UI" Version="3.5.1" Condition="!$(TargetFramework.StartsWith('netcoreapp'))" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Wokhan.Core" Version="0.9.3-beta" />
     <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.2.0" />
     <PackageReference Include="VirtualizingObservableCollection" Version="1.2.0" Condition="$(TargetFramework.StartsWith('netcoreapp'))" />
