@@ -4,7 +4,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <LangVersion>9.0</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <_AndroidApiLevel>33</_AndroidApiLevel>
+    <!--<_AndroidApiLevel>33</_AndroidApiLevel>-->
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">
