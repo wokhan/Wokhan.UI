@@ -18,7 +18,7 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Install Android workload
-      run: dotnet workload restore
+      run: dotnet workload restore Wokhan.UI/Wokhan.UI.sln
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
