@@ -1,9 +1,10 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;uap10.0.16299;monoandroid10.0</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net6.0-android</TargetFrameworks>
     <NeutralLanguage>en-US</NeutralLanguage>
     <LangVersion>9.0</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <_AndroidApiLevel>33</_AndroidApiLevel>
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">
@@ -43,25 +44,28 @@
     <!--<NoWarn>$(NoWarn),1998,4014,VSX1000,NU1605</NoWarn>-->
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('monoandroid'))">
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0-android'))">
     <!--Android DesignTimeBuild error workaround-->
     <DesignTimeBuild>false</DesignTimeBuild>
     <DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0-windows'))">
     <DefineConstants>$(DefineConstants);__WPF__</DefineConstants>
     <UseWPF>True</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- Workaround for NU1605 for DynamicLinq // Source https://docs.microsoft.com/en-us/nuget/reference/errors-and-warnings/nu1605#solution-1 -->
-    <PackageReference Include="Microsoft.NETCore.Targets" Version="3.0.0" PrivateAssets="all" />
-    <PackageReference Include="Uno.UI" Version="3.5.1" Condition="!$(TargetFramework.StartsWith('netcoreapp'))" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Wokhan.Core" Version="0.9.3-beta" />
-    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.2.0" />
-    <PackageReference Include="VirtualizingObservableCollection" Version="1.2.0" Condition="$(TargetFramework.StartsWith('netcoreapp'))" />
+    <!--<PackageReference Include="Microsoft.NETCore.Targets" Version="3.0.0" PrivateAssets="all" />-->
+    <PackageReference Include="Uno.UI" Version="4.6.39" Condition="!$(TargetFramework.StartsWith('net6.0-windows'))" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Wokhan.Core" Version="0.9.4-beta" />
+    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.4.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="VirtualizingObservableCollection" Version="1.2.0" Condition="$(TargetFramework.StartsWith('net6.0-windows'))" />
   </ItemGroup>
 
   <ItemGroup>
@@ -76,12 +80,12 @@
     <None Include="$(PatternOthers);$(PatternWPF)" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('monoandroid'))">
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net6.0-android'))">
     <Compile Remove="$(PatternUAP);$(PatternWPF)" />
     <None Include="$(PatternUAP);$(PatternWPF)" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net6.0-windows'))">
     <Compile Remove="$(PatternUWP);$(PatternUAP);$(PatternOthers)" />
     <None Include="$(PatternUWP);$(PatternUAP);$(PatternOthers)" />
   </ItemGroup>

@@ -1,18 +1,25 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shell;
-using System.ComponentModel;
 using System.Windows.Markup;
+using System.Windows.Shell;
 
 namespace Wokhan.UI.Xaml.Controls
 {
     [ContentProperty(nameof(Children))]
     public partial class CustomWindowChrome : UserControl, INotifyPropertyChanged
     {
+        public Visibility MinimizeButtonVisibility => (Window?.ResizeMode.HasFlag(ResizeMode.CanMinimize) ?? true) ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility MaximizeButtonVisibility => (Window?.ResizeMode.HasFlag(ResizeMode.CanResize) ?? true) ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility CloseButtonVisibility => CanClose ? Visibility.Visible : Visibility.Collapsed;
+
         public bool IsWindowMaximized => Window?.WindowState.HasFlag(WindowState.Maximized) ?? false;
+
+        public bool CanClose { get => (bool)GetValue(CanCloseProperty); set => SetValue(CanCloseProperty, value); }
+        public static readonly DependencyProperty CanCloseProperty = DependencyProperty.Register(nameof(CanClose), typeof(bool), typeof(CustomWindowChrome));
+
 
         public UIElementCollection Children { get => (UIElementCollection)GetValue(ChildrenProperty); private set => SetValue(ChildrenProperty, value); }
         public static readonly DependencyProperty ChildrenProperty = DependencyProperty.Register(nameof(Children), typeof(UIElementCollection), typeof(CustomWindowChrome));
@@ -60,7 +67,12 @@ namespace Wokhan.UI.Xaml.Controls
                 Window = Window.GetWindow(this);
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Window)));
 
-                Chrome = new WindowChrome() { ResizeBorderThickness = new Thickness(1), CaptionHeight = Height, UseAeroCaptionButtons = false };
+                Chrome = new WindowChrome() { ResizeBorderThickness = new Thickness(1), UseAeroCaptionButtons = false };
+                if (Height != double.NaN)
+                {
+                    Chrome.CaptionHeight = Height;
+                }
+
                 WindowChrome.SetWindowChrome(Window, Chrome);
 
                 Window.StateChanged += Window_StateChanged;
