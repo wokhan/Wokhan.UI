@@ -17,9 +17,6 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Install Android workload
-      run: dotnet workload restore Wokhan.UI.sln
-
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
       with:
@@ -28,6 +25,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       
+    - name: Install Android workload
+      run: dotnet workload restore
+
     #Source: https://dusted.codes/github-actions-for-dotnet-core-nuget-packages#drive-nuget-version-from-git-tags (ported to PowerShell for Windows runners)
     - name: Set Nuget package version
       shell: bash
