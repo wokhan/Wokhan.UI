@@ -45,7 +45,7 @@ jobs:
         echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
 
     - name: Build and pack
-      run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ env.PACKAGE_VERSION }}
+      run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ env.PACKAGE_VERSION }} /p:JavaSdkDirectory=C:\hostedtoolcache\windows\Java_Microsoft_jdk\11.0.15\x64
     
     #- name: Generate documentation (retrieve global tool)
     #  run: dotnet tool install xmldocmd -g
