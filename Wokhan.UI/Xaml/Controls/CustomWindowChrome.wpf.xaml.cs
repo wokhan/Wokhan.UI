@@ -46,7 +46,7 @@ namespace Wokhan.UI.Xaml.Controls
 
         private const int MaximizedMargin = 7;
         private WindowChrome Chrome;
-        private Thickness prevThickness;
+        private Thickness? prevThickness;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -66,8 +66,10 @@ namespace Wokhan.UI.Xaml.Controls
             {
                 Window = Window.GetWindow(this);
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Window)));
-
-                Chrome = new WindowChrome() { ResizeBorderThickness = new Thickness(1), UseAeroCaptionButtons = false };
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinimizeButtonVisibility)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MaximizeButtonVisibility)));
+                
+                Chrome = new WindowChrome() { UseAeroCaptionButtons = false };
                 if (Height != double.NaN)
                 {
                     Chrome.CaptionHeight = Height;
@@ -93,9 +95,9 @@ namespace Wokhan.UI.Xaml.Controls
                 prevThickness = parent.Margin;
                 parent.Margin = new Thickness(MaximizedMargin);
             }
-            else if (prevThickness != null)
+            else if (prevThickness is not null)
             {
-                parent.Margin = prevThickness;
+                parent.Margin = prevThickness.Value;
             }
         }
     }

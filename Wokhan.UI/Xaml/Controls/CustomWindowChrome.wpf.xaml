@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"
-             d:DesignHeight="34" d:DesignWidth="700">
+             d:DesignHeight="34" d:DesignWidth="700" 
+             DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <UserControl.Resources>
-        <Style x:Key="DefaultButtonStyle" TargetType="Button" BasedOn="{x:Null}">
+        <Style TargetType="Button" BasedOn="{x:Null}">
             <Style.Setters>
                 <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
                 <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
@@ -15,22 +16,22 @@
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Setter Property="Width" Value="40" />
                 <Setter Property="Height" Value="30" />
+                <Setter Property="Background" Value="Transparent" />
             </Style.Setters>
         </Style>
-        <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}" />
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="{Binding TitleAlignment}">
-            <Image Margin="0,0,5,0" Stretch="Uniform" Source="{Binding Window.Icon}" VerticalAlignment="Stretch" Style="{Binding IconStyle}" />
-            <TextBlock FontSize="16" VerticalAlignment="Center" Style="{Binding TitleStyle}" Text="{Binding Window.Title,FallbackValue='Window title'}" />
+            <Image Stretch="Uniform" Source="{Binding Window.Icon}" VerticalAlignment="Stretch" Style="{Binding IconStyle}" />
+            <TextBlock Margin="15,0,0,0"  FontSize="16" VerticalAlignment="Center" Style="{Binding TitleStyle}" Text="{Binding Window.Title,FallbackValue='Window title'}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
             <StackPanel x:Name="ChildrenHost" Orientation="Horizontal" />
             <StackPanel Orientation="Horizontal">
-                <Button Command="{x:Static SystemCommands.MinimizeWindowCommand}" Style="{StaticResource DefaultButtonStyle}" Content="&#xE949;" Visibility="{Binding MinimizeButtonVisibility}" />
-                <Button>
+                <Button Command="{x:Static SystemCommands.MinimizeWindowCommand}" Content="&#xE949;" Visibility="{Binding MinimizeButtonVisibility}" />
+                <Button Visibility="{Binding MaximizeButtonVisibility}">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                             <Setter Property="Content" Value="&#xE739;" />
                             <Setter Property="Command" Value="{x:Static SystemCommands.MaximizeWindowCommand}" />
                             <Style.Triggers>
@@ -43,14 +44,18 @@
                     </Button.Style>
                 </Button>
                 <Button Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xE106;">
-                    <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-                            <Style.Setters>
-                                <Setter Property="Background" Value="Red" />
-                                <Setter Property="Foreground" Value="White" />
-                            </Style.Setters>
-                        </Style>
-                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Name="Border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <ContentPresenter Name="Content" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextBlock.FontFamily="{TemplateBinding FontFamily}" TextBlock.FontSize="{TemplateBinding FontSize}" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Red" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
             </StackPanel>
         </StackPanel>
