@@ -9,6 +9,13 @@ jobs:
     runs-on: windows-latest
 
     steps:    
+    - name: Setup Java JDK
+      uses: actions/setup-java@v3.9.0
+      with:
+        # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+        java-version: 11
+        distribution: microsoft
+    
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1
     
@@ -38,7 +45,7 @@ jobs:
         echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
 
     - name: Build and pack
-      run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ env.PACKAGE_VERSION }}
+      run: msbuild -t:pack /restore /p:Configuration=Release /p:Version=${{ env.PACKAGE_VERSION }} /p:JavaSdkDirectory=C:\hostedtoolcache\windows\Java_Microsoft_jdk\11.0.15\x64
     
     #- name: Generate documentation (retrieve global tool)
     #  run: dotnet tool install xmldocmd -g
