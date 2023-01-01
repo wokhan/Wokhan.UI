@@ -12,7 +12,7 @@
     <PackageIcon></PackageIcon>
     <PackageTags>WPF UWP UnoPlatform UI Windows</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/wokhansoft/Wokhan.UI</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/wokhan/Wokhan.UI</PackageProjectUrl>
     <PackageReleaseNotes>Please check GitHub repository for details.</PackageReleaseNotes>
     <Description>Binding converters, markup extensions and various helpers for WPF, UWP (cross platform thank to Uno Platform).</Description>
     <RepositoryType></RepositoryType>

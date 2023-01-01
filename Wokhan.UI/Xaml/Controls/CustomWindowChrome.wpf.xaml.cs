@@ -68,6 +68,7 @@ namespace Wokhan.UI.Xaml.Controls
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Window)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinimizeButtonVisibility)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MaximizeButtonVisibility)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CloseButtonVisibility)));
                 
                 Chrome = new WindowChrome() { UseAeroCaptionButtons = false };
                 if (Height != double.NaN)
