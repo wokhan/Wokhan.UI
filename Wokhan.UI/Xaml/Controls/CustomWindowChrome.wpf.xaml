@@ -43,7 +43,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xE106;">
+                <Button Visibility="{Binding CloseButtonVisibility}" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xE106;">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Name="Border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
